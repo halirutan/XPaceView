@@ -2,8 +2,14 @@ cmake_minimum_required(VERSION 3.8.2)
 cmake_policy(SET CMP0048 NEW)
 project(XPaceView VERSION 1.0.0 LANGUAGES C CXX)
 
-set(CMAKE_PREFIX_PATH   "/home/patrick/Qt/5.12.6/gcc_64/lib/cmake")
-set(QT_QMAKE_EXECUTABLE "/home/patrick/Qt/5.12.6/gcc_64/bin/qmake")
+
+if(UNIX AND NOT APPLE)
+    set(CMAKE_PREFIX_PATH   "/home/patrick/Qt/5.12.6/gcc_64/lib/cmake")
+    set(QT_QMAKE_EXECUTABLE "/home/patrick/Qt/5.12.6/gcc_64/bin/qmake")
+elseif(APPLE)
+    set(CMAKE_PREFIX_PATH   "/Users/pscheibe/Qt/5.12.6/clang_64/lib/cmake")
+    set(QT_QMAKE_EXECUTABLE "/Users/pscheibe/Qt/5.12.6/clang_64/bin/qmake")
+endif()
 
 find_package(Qt5 COMPONENTS Core Gui Qml Quick QuickControls2 REQUIRED)
 
@@ -17,6 +23,7 @@ source_group("Qml Files" FILES ${QML_SRC})
 add_executable(${PROJECT_NAME}
         src/main.cpp
         src/backend.cpp
+        src/logfile.cpp
         resources.qrc
         ${QML_SRC}
         ${JS_SRC}
