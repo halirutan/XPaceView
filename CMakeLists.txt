@@ -16,6 +16,7 @@ source_group("Qml Files" FILES ${QML_SRC})
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
+        src/backend.cpp
         resources.qrc
         ${QML_SRC}
         ${JS_SRC}

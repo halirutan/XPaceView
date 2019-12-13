@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Dialogs 1.2
 import QtQml 2.12
 import "qrc:/Icon.js" as MDFont
 import "../components"
@@ -49,18 +50,24 @@ ApplicationWindow {
             spacing: 5
             RoundButton {
                 text: Icons.mdfolder_open
-                toolTip: qsTr("Open Folders and Files")
+                toolTip: qsTr("Open files in new graph")
                 Layout.alignment: Qt.AlignLeft
+                onClicked: {
+                    backend.closeFiles()
+                    fileDialog.open()
+                }
             }
             RoundButton {
                 text: Icons.mdadd
-                toolTip: qsTr("Add Files to Graph")
+                toolTip: qsTr("Add files to current graph")
                 Layout.alignment: Qt.AlignLeft
+                onClicked: fileDialog.open()
             }
             RoundButton {
                 text: Icons.mdclose
-                toolTip: qsTr("Close Graphs")
+                toolTip: qsTr("Close graph")
                 Layout.alignment: Qt.AlignLeft
+                onClicked: backend.closeFiles()
             }
             ToolSeparator { }
             RoundButton {
@@ -78,6 +85,8 @@ ApplicationWindow {
                 toolTip: qsTr("Move")
                 Layout.alignment: Qt.AlignLeft
             }
+
+            // Invisible item just to fill the space
             Item {
                 Layout.fillWidth: true
             }
@@ -109,5 +118,14 @@ ApplicationWindow {
                 text: "Read Only"
             }
         }
+    }
+
+    // FileDialog for opening and adding files
+    FileDialog {
+            id: fileDialog
+            selectExisting: true
+            selectMultiple: true
+            nameFilters: {"*.log"}
+            onAccepted: backend.addFiles(fileUrls)
     }
 }

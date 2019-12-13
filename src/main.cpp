@@ -2,7 +2,10 @@
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
 #include <QDebug>
+#include <QQmlContext>
 #include <QFile>
+
+#include "backend.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,12 +24,16 @@ int main(int argc, char *argv[])
     }
 
     const QUrl url(QStringLiteral("qrc:/views/MainView.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
+                [url](QObject *obj, const QUrl &objUrl) { if (!obj && url == objUrl) QCoreApplication::exit(-1); },
+    Qt::QueuedConnection
+            );
+
+    QScopedPointer<Backend> backend(new Backend);
+    engine.rootContext()->setContextProperty("backend", backend.data());
     engine.load(url);
+
+
 
     return QGuiApplication::exec();
 }
