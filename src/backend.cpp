@@ -18,7 +18,8 @@ void Backend::addFiles(QList<QUrl> files)
     Q_FOREACH(QUrl url, files) {
         LogFile l(url);
         bool result = l.parse();
-        std::cout << "Parsing result: " << result << std::endl;
+        qDebug() << "Parsing done: " << result << endl;
+        l.calculateAbsolutePositions();
     }
 
 }
