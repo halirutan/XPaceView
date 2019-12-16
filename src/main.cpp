@@ -6,7 +6,7 @@
 #include <QQmlContext>
 #include <QFile>
 
-#include "xpaceview.h"
+#include "xpacelogview.h"
 
 int main(int argc, char *argv[])
 {

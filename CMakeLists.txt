@@ -22,7 +22,7 @@ source_group("Qml Files" FILES ${QML_SRC})
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
-        src/xpaceview.cpp
+        src/xpacelogview.cpp
         src/logfile.cpp
         resources.qrc
         ${QML_SRC}

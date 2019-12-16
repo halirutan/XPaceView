@@ -13,35 +13,6 @@ ApplicationWindow {
     height: 512
     title: qsTr("XPaceView — Your cute XPace log visualizer")
 
-    menuBar: MenuBar {
-        Menu {
-            title: "File"
-            MenuItem {
-                text: "Open..."
-            }
-            MenuItem {
-                text: "Close"
-            }
-            MenuSeparator {}
-            MenuItem {
-                text: "Exit"
-            }
-        }
-
-        Menu {
-            title: "Tools"
-            MenuItem {
-                text: "Cut"
-            }
-            MenuItem {
-                text: "Copy"
-            }
-            MenuItem {
-                text: "Paste"
-            }
-        }
-    }
-
     header: ToolBar {
         height: 40
         RowLayout {

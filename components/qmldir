@@ -1,3 +1,4 @@
 module components
 RoundButton 1.0 RoundButton.qml
+XPaceLogView 1.0 XPaceLogView.qml
 singleton Icons 1.0 Icons.qml

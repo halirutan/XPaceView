@@ -3,7 +3,7 @@
 #include <QUrl>
 #include <iostream>
 
-#include "xpaceview.h"
+#include "xpacelogview.h"
 #include "logfile.h"
 
 
