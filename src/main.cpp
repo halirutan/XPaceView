@@ -1,21 +1,24 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlComponent>
 #include <QFontDatabase>
 #include <QDebug>
 #include <QQmlContext>
 #include <QFile>
 
-#include "backend.h"
+#include "xpaceview.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    qmlRegisterType<XPaceView>();
 
     QGuiApplication app(argc, argv);
+    app.setOrganizationName("Neurophysics");
+    app.setOrganizationDomain("cbs.mpg.de");
     QQmlApplicationEngine engine;
 
     QStringList fonts = QStringList{} << ":/fonts/MaterialIcons.ttf";
-
 
     for (const auto& font : fonts) {
       if (QFontDatabase::addApplicationFont(font) == -1) {
@@ -23,17 +26,12 @@ int main(int argc, char *argv[])
       }
     }
 
-    const QUrl url(QStringLiteral("qrc:/views/MainView.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app,
-                [url](QObject *obj, const QUrl &objUrl) { if (!obj && url == objUrl) QCoreApplication::exit(-1); },
-    Qt::QueuedConnection
-            );
+    const QUrl url(QStringLiteral("qrc:/views/mainView.qml"));
+    QQmlComponent compontent(&engine, url);
 
-    QScopedPointer<Backend> backend(new Backend);
-    engine.rootContext()->setContextProperty("backend", backend.data());
-    engine.load(url);
-
-
-
+    for(QQmlError err: compontent.errors()) {
+        qDebug() << err;
+    }
+    compontent.create();
     return QGuiApplication::exec();
 }

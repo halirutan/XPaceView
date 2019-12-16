@@ -3,16 +3,16 @@
 #include <QUrl>
 #include <iostream>
 
-#include "backend.h"
+#include "xpaceview.h"
 #include "logfile.h"
 
 
-Backend::Backend(QObject *parent) : QObject(parent)
+XPaceView::XPaceView(QObject *parent) : QObject(parent)
 {
 
 }
 
-void Backend::addFiles(QList<QUrl> files)
+void XPaceView::addFiles(QList<QUrl> files)
 {
     qDebug() << "Files Added";
     Q_FOREACH(QUrl url, files) {
@@ -21,11 +21,12 @@ void Backend::addFiles(QList<QUrl> files)
         qDebug() << "Parsing done: " << result << endl;
         l.calculateAbsolutePositions();
     }
+    emit logLoaded();
 
 }
 
 
-void Backend::closeFiles()
+void XPaceView::closeFiles()
 {
     qDebug() << "Files Closed";
 }

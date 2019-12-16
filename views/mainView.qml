@@ -6,13 +6,12 @@ import QtQml 2.12
 import "qrc:/Icon.js" as MDFont
 import "../components"
 
-ApplicationWindow {    
+ApplicationWindow {
     id: mainWindow
     visible: true
     width: 920
     height: 512
     title: qsTr("XPaceView — Your cute XPace log visualizer")
-
 
     menuBar: MenuBar {
         Menu {
@@ -104,9 +103,10 @@ ApplicationWindow {
         id: centerPane
         anchors.fill: parent
         Label {
+            id: myLabel
             text: "Do Something!"
             font.pointSize: 30
-            color: "#d0d0d0"
+            //color: "#d0d0d0"
             anchors.centerIn: parent
         }
     }

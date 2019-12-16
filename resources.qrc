@@ -4,7 +4,7 @@
         <file alias="Icon.js">js/Icon.js</file>
     </qresource>
     <qresource prefix="/views">
-        <file alias="MainView.qml">views/MainView.qml</file>
+        <file alias="mainView.qml">views/mainView.qml</file>
     </qresource>
     <qresource prefix="/components">
         <file alias="RoundButton.qml">components/RoundButton.qml</file>

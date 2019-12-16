@@ -5,20 +5,18 @@
 #include <QList>
 #include <QUrl>
 
-class Backend : public QObject
+class XPaceView : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Backend(QObject *parent = nullptr);
+    explicit XPaceView(QObject *parent = nullptr);
     Q_INVOKABLE void addFiles(QList<QUrl>);
     Q_INVOKABLE void closeFiles();
 
 signals:
-
-public slots:
-
-
+    void logLoaded();
+    void logClosed();
 };
 
 #endif // BACKEND_H
